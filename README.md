@@ -1,10 +1,10 @@
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-
 # Next.js MDX Blog Kit
+
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 This kit is designed to give you a fully functional, easy to use (if you are a developer) blog with perfect Lighthouse scores.
 
-![Lighthouse audit with 100% scores.](./static/images/lighthouse.png "Lighthouse Scores")
+![Lighthouse audit with 100% scores.](./public/static/images/lighthouse.png "Lighthouse Scores")
 
 The idea is to provide a complete blogging system that requires only two things from the developer:
 
@@ -13,23 +13,24 @@ The idea is to provide a complete blogging system that requires only two things 
 
 And, of course, this repo could merely be a starting point for your hacking. Hack away and have fun.
 
-To clone this repo: `git clone --depth=1 https://github.com/lorenseanstewart/nextjs-mdx-blog-kit <YOUR_PROJECT_NAME>`
+To clone this repo: `git clone --depth=1 https://github.com/BarisGece/NextJS-MDX-TailwindCSS-BlogKit <YOUR_PROJECT_NAME>`
 
-#### Feature list:
+## Feature list
 
--   Static website deployment
--   Write your posts in markdown, and use React components in your markdown thanks to [MDX](https://github.com/mdx-js/mdx). Or use plain React, if you prefer.
--   A CLI for creating new pages or posts. It processes all the necessary meta data for creating the blog list and adding SEO data to all pages.
--   Perfect Lighthouse scores.
--   Excellent SEO
--   Service Worker that caches all pages and posts for offline reading
--   Tag search
--   A [reading progress indicator](https://github.com/jeremenichelli/scrollProgress) on posts (optional/configurable)
--   [Code syntax highlighting](https://github.com/conorhastings/react-syntax-highlighter)
--   [Smooth scroll links](https://github.com/mauricevancooten/react-anchor-link-smooth-scroll)
--   [Optimized images](https://github.com/cyrilwanner/next-optimized-images)
--   Tests are set up using [Jest](https://github.com/facebook/jest)
--   Easy deploys with Zeit's [Now](https://zeit.co/now)
+* Static website deployment
+* Write your posts in markdown, and use React components in your markdown thanks to [MDX](https://github.com/mdx-js/mdx). Or use plain React, if you prefer
+* A CLI for creating new pages or posts. It processes all the necessary meta data for creating the blog list and adding SEO data to all pages
+* Perfect Lighthouse scores
+* Excellent SEO
+* Service Worker that caches all pages and posts for offline reading
+* Tag search
+* [Tailwind CSS](https://github.com/tailwindcss/tailwindcss) Framework implemented
+* A [reading progress indicator](https://github.com/jeremenichelli/scrollProgress) on posts (optional/configurable)
+* [Code syntax highlighting](https://github.com/conorhastings/react-syntax-highlighter)
+* [Smooth scroll links](https://github.com/mauricevancooten/react-anchor-link-smooth-scroll)
+* [Optimized images](https://github.com/cyrilwanner/next-optimized-images)
+* Tests are set up using [Jest](https://github.com/facebook/jest)
+* Easy deploys with Zeit's [Now](https://zeit.co/now)
 
 ## CLI
 
@@ -38,21 +39,21 @@ This blog processes pages based on the meta data found in the page and post comp
 There are two ways to use the CLI:
 
 1. Install the CLI so you can use the `blog` keyword.
-    - This allows you to use commands like `blog -t post -m`
+   * This allows you to use commands like `blog -t post -m`
 2. Use the file as a script.
-    - This allows you to use commands like `./cli.js -t post -m`
+   * This allows you to use commands like `./cli.js -t post -m`
 
-#### 1. Install: CLI with keyword
+### 1. Install: CLI with keyword
 
 At the root of the project, in your terminal run the command `npm link` or `sudo npm link`. This will allow you to use the `blog` keyword when using the CLI.
 
-If you have trouble installing the CLI, skip the installation and use the file as a script (see #2 below).
+If you have trouble installing the CLI, skip the installation and use the file as a script [see below](#2.-No-Install:-CLI-file-as-script).
 
-#### 2. No Install: CLI file as script
+### 2. No Install: CLI file as script
 
 At the root of the project, in your terminal run the command `chmod +x ./cli.js` or `sudo chmod +x ./cli.js`. This allows you to use the CLI like a script: `./cli.js <your-flags-and-options-here>`.
 
-#### CLI Flags
+### CLI Flags
 
 To list the flags and their descriptions, run one of the following commands in the root of the project:
 
@@ -61,18 +62,18 @@ To list the flags and their descriptions, run one of the following commands in t
 
 Either of those commands will display:
 
-```
+```sh
 Flags:
       -t  ["template"  | String  | either "page" or "post"]
       -m  ["mdx file"  |   n/a   | if present file will be .mdx, else .js]
       -f  ["file name" | String  | e.g. "how-to-build-a-nextjs-app"]
 ```
 
-#### Creating pages and posts
+### Creating pages and posts
 
 The basic difference between a page and a post is that a **page** lives inside the `pages/` directory, whereas a **post** lives in the `pages/blog/` directory. Only **post** files are included in the blog post list at `/blog`. Use the `-t` flag to indicate whether you want to create a new page or a new post.
 
-```
+```sh
 blog -t page -f newPage // this creates a page named "newPage.js"
 blog -t post            // this creates a JavaScript post with a randomized file name
 ```
@@ -83,16 +84,16 @@ If you omit the `-f` flag, the CLI will generate a file name for you but you sho
 
 You also have the option of using a **MDX** file or a **JavaScript** file for your new page/post.
 
-```
+```sh
 blog -t page -m // this creates a MDX file with a randomized name
 blog -t page -f contact   // this creates a JavaScript file named contact.js
 ```
 
-#### Meta Data
+## Meta Data
 
 Each page/post needs to export (not default export) a `meta` object. The **required fields** for content are:
 
-```
+```js
 title: "Title of Page/Post goes here",
 tags: ["tag-1", "tag-2"],
 layout: "page",
@@ -101,17 +102,17 @@ modifiedDate: false,
 seoDescription: "In this post I <keyword> with <keyword>. And blah blah."
 ```
 
--   **title**: The title displayed on the page. It is also used for SEO.
--   **tags**: This array enables the tag search page. The tags are also used in the SEO header property: `<meta name="keywords" content={stringOfAllPostTags} />`.
--   **layout**: This is used in the `utils/render-app-layout.js` function. There are currently four layouts (and a default layout): `"blog-post-list"`, `"post"`, `"page"` and `"search"`.
--   **publishDate**: This is displyed on blog posts. It is also used for SEO. Must be in "YYYY-MM-DD" format.
--   **modifiedDate**: Used for SEO. Include this if the post has been modified. If it has not been modified, leave it out or give it the value `false`.
--   **seoDescription**: Used for SEO.
+* **title**: The title displayed on the page. It is also used for SEO.
+* **tags**: This array enables the tag search page. The tags are also used in the SEO header property: `<meta name="keywords" content={stringOfAllPostTags} />`.
+* **layout**: This is used in the `utils/render-app-layout.js` function. There are currently four layouts (and a default layout): `"blog-post-list"`, `"post"`, `"page"` and `"search"`.
+* **publishDate**: This is displyed on blog posts. It is also used for SEO. Must be in "YYYY-MM-DD" format.
+* **modifiedDate**: Used for SEO. Include this if the post has been modified. If it has not been modified, leave it out or give it the value `false`.
+* **seoDescription**: Used for SEO.
 
 Blog posts have optional meta properties. These **optional fields** are:
 
--   **exclude**: Set this property to `true` if you do not want it to appear on the blog post list on the `/blog` page.
--   **hideProgressBar**: Set this property to `true` if you do not want the reading progress bar for a particular blog post.
+* **exclude**: Set this property to `true` if you do not want it to appear on the blog post list on the `/blog` page.
+* **hideProgressBar**: Set this property to `true` if you do not want the reading progress bar for a particular blog post.
 
 If you do not include the optional properties for a blog post, they are assumed to be false.
 
@@ -119,7 +120,7 @@ If you do not include the optional properties for a blog post, they are assumed 
 
 This component should be added to each blog post after the `meta` export. Make sure there is an empty line between the `meta` export and `<BlogMeta />`, otherwise the MDX parser will throw an error. To illustrate:
 
-```
+```js
 import BlogMeta from "../../components/BlogMeta";
 export const meta = {
     title: "Third Post With Image",
@@ -137,13 +138,13 @@ _All this is added for you when you use the CLI, but it's good to know these req
 
 ## Styles
 
-This project uses [styled-jsx](https://github.com/zeit/styled-jsx). The docs are found [here](https://github.com/zeit/styled-jsx#getting-started).
+This project mainly uses [Tailwind CSS Framework](https://github.com/tailwindcss/tailwindcss) via CSS-in-JS library [Emotion-JS](https://github.com/emotion-js/emotion) and [tailwind-canary.macro](https://www.npmjs.com/package/tailwind-canary.macro). However,you can use other **CSS-in-JS** libraries as [styled-components](https://github.com/styled-components/styled-components) and [styled-jsx](https://github.com/zeit/styled-jsx). The docs are found [here](https://github.com/zeit/styled-jsx#getting-started) for **styled-jsx**.
 
 ## Config
 
 This blog kit uses `/config/config.yml` for global configuration data.
 
-```
+```yaml
 config:
     author: Your Name here
     siteName: Your Site Name here
@@ -162,16 +163,16 @@ config:
 
     # This is list is used to create the links in the navigation panel
     navigation:
-        - { text: Home, link: / }
-        - { text: Blog, link: /blog }
-        - { text: About, link: /about }
+      - { text: Home, link: /, isShown: true }
+      - { text: Blog, link: /blog, isShown: true }
+      - { text: About, link: /about, isShown: true }
 
     css:
-        primaryColor: "#C70039"
-        accentColor: "#FF5733"
-        lightGray: "#eeeeee"
-        backgroundColor: "#ffffff"
-        black: "#333"
+      primaryColor: "#2962ff"
+      accentColor: "#455A64"
+      lightGray: "#eeeeee"
+      backgroundColor: "#ffffff"
+      black: "#333"
 ```
 
 All the properties here are required, add more properties as you need them.
@@ -190,7 +191,7 @@ The syntax highlighting component is found at `/code-snippets/CodeBlocks.js`. Th
 
 In `/code-snippets/post-one/`, you will find two instances of the CodeBlock component: `EscapedBackticksCode` and `DemoCode`. First, use a template string to wrap your code snippet. Second, use that string in the CodeBlock component.
 
-The `EscapedBackticksCode` component illustrates how to include back ticks within your code snippet. (Back ticks are the <code>`</code> character used in JavaScript template strings.)
+The `EscapedBackticksCode` component illustrates how to include backticks within your code snippet. (Backticks are the **`** character used in JavaScript template strings.)
 
 In a page or post component, you can import your code snippet component and use it in a React file or an MDX file.
 
@@ -202,14 +203,14 @@ Smooth scrolling is achieved through the use of two components: `<SmoothLink />`
 
 The `<SmoothLink />` takes two props:
 
--   **target**: This is the id you want to scroll to.
--   **linkText**: This is the text displayed by the link.
+* ***target**: This is the id you want to scroll to.
+* **linkText**: This is the text displayed by the link.
 
 `<LinkAnchor />` can be any html element that is the destination of a scroll. `<LinkAnchor />` takes three props:
 
--   **element**: This is the type of html element the anchor needs to be. In the component file there is a list of valid html tags. To make additional tags valid, add them to the list.
--   **id**: The anchor html tag needs an id that connects the `<SmoothLink />` to the `<AnchorLink />`.
--   **text**: This is the text the html tag will display.
+* **element**: This is the type of html element the anchor needs to be. In the component file there is a list of valid html tags. To make additional tags valid, add them to the list.
+* **id**: The anchor html tag needs an id that connects the `<SmoothLink />` to the `<AnchorLink />`.
+* **text**: This is the text the html tag will display.
 
 If everything is working correctly, when you click a `<SmoothLink />` it will scroll the user down to its dedicated `<AnchorLink />`. For reference, check out an example: `pages/blog/demo-reading-progress-bar.mdx`.
 
@@ -219,13 +220,13 @@ For more information, refer to the `react-anchor-link-smooth-scroll` [docs](http
 
 To use an image in an MDX file, import the image like this:
 
-```
+```js
 import imageUrl from "../../public/static/images/mountains.jpg";
 ```
 
 Then use the image like this:
 
-```
+```js
 <img src={imageUrl} className="img-centered" alt="Image alt" />
 ```
 
@@ -253,8 +254,8 @@ These icons are displayed if a user desides to save your blog to their homescree
 
 To load custom fonts, follow these two steps:
 
--   Add the font files to `/static/fonts`
--   Add font face CSS rules to `/styles/index.js`
+* Add the font files to `/static/fonts`
+* Add font face CSS rules to `/styles/index.js`
 
 Keep in mind custom fonts affect your site's performance, so use be careful with your CSS `font-display` property. This project uses `font-display: auto;` to help make font loading more performant.
 
@@ -278,9 +279,15 @@ Once you have an account and the CLI installed, open your terminal at the root o
 
 For more information see the Now [docs](https://zeit.co/docs/v2/deployments/official-builders/static-build-now-static-build/).
 
-## Warnings and Gotchas:
+## Warnings and Gotchas
 
--   Custom routes for static sites do seem possible at the moment. As the Now v2 ecosystem develops, this will probably become manageable.
--   Do not put regular React components in the `pages` directory, as they are expected to be full web pages. Next.js creates a route for each of these pages/components. Put your non-page components in the `components` directory.
--   Blog posts must have an empty line between the meta export and the <BlogMeta /> component. The MDX parser errors if there is not a space there.
--   If you add a new page/post and it does not appear as a page or post, run `npm run clean` or delete `.next/` and run `npm run dev`.
+* Custom routes for static sites do seem possible at the moment. As the Now v2 ecosystem develops, this will probably become manageable.
+* Do not put regular React components in the `pages` directory, as they are expected to be full web pages. Next.js creates a route for each of these pages/components. Put your non-page components in the `components` directory.
+* Blog posts must have an empty line between the meta export and the `<BlogMeta />` component. The MDX parser errors if there is not a space there.
+* If you add a new page/post and it does not appear as a page or post, run `npm run clean` or delete `.next/` and run `npm run dev`.
+
+## To Do
+
+* [ ] Implementing `onScroll` event via React Hooks for Header
+* [ ] Add [CodeSandbox](https://codesandbox.io/) demos
+* [ ] Integrate `tailwind.config.js` with `config.yaml`
